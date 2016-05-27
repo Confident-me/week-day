@@ -5,7 +5,9 @@
 	<title>当前时间</title>
 </head>
 <body>
-	<select name="firstShipDate" id="firstShipDate" style="width:30%;">
+	<div id='show' style="margin: 0 auto;text-align: center;margin-top: 50px;font-size: 50px;color: red;">当前时间为：</div>
+
+	<select name="firstShipDate" id="firstShipDate" style="width:30%;margin: 50px auto;display: block;font-size: 2rem;">
 		
 	</select>
 </body>
@@ -28,7 +30,7 @@ function showTime(){
 		weekday[5] = '周五'
 		weekday[6] = '周六'
 	var allMonth;
-	var week = 0;
+	var weeks = 0;
 	var date_str = '';
 	if (allMonth%2 == 0) {
 		allMonth = 30
@@ -37,12 +39,15 @@ function showTime(){
 	}
 	for (var i = day; i < allMonth; i++) {
 		now.setFullYear(year,month,i);
-		if (now.getDay() == week) {
-			date_str += '<option>'+month+'月'+i+'号'+weekday[week]+'</option>'
+		if (now.getDay() == weeks) {
+			date_str += '<option>'+month+'月'+i+'号'+weekday[weeks]+'</option>'
 		}
 	}
 	document.getElementById('firstShipDate').innerHTML = date_str ;
-	setTimeout('showTime()',10000);
+	// setTimeout('showTime()',10000);
+
+	document.getElementById('show').innerHTML = '当前时间为：<br>'+'<span style="color:blue">'+year+'</span>'+'年'+(month+1)+'月'+day+'日'+'('+weekday[week]+')'+hour+':'+minute+':'+second;
+		setTimeout('showTime()',500)
 }
 showTime()
 </script>
