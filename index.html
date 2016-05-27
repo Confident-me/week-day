@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>当前时间</title>
+</head>
+<body>
+	<select name="firstShipDate" id="firstShipDate" style="width:30%;">
+		
+	</select>
+</body>
+<script>
+function showTime(){
+	var now = new Date();
+	var year = now.getFullYear();
+	var month = now.getMonth();
+	var day = now.getDate();
+	var hour = now.getHours();
+	var minute = now.getMinutes();
+	var second = now.getSeconds();
+	var week = now.getDay();
+	var weekday = new Array(7)
+		weekday[0] = '周日'
+		weekday[1] = '周一'
+		weekday[2] = '周二'
+		weekday[3] = '周三'
+		weekday[4] = '周四'
+		weekday[5] = '周五'
+		weekday[6] = '周六'
+	var allMonth;
+	var week = 0;
+	var date_str = '';
+	if (allMonth%2 == 0) {
+		allMonth = 30
+	}else{
+		allMonth = 31;
+	}
+	for (var i = day; i < allMonth; i++) {
+		now.setFullYear(year,month,i);
+		if (now.getDay() == week) {
+			date_str += '<option>'+month+'月'+i+'号'+weekday[week]+'</option>'
+		}
+	}
+	document.getElementById('firstShipDate').innerHTML = date_str ;
+	setTimeout('showTime()',10000);
+}
+showTime()
+</script>
+</html>

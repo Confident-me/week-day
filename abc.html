@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>当前时间</title>
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<style>
+	#box span{display:inline-block;width:50px;height:80px;background:#999;color:#000;text-align:center;line-height:80px;float:left;margin-right:10px;}
+</style>
+<body>
+	<div id='show' style="margin: 0 auto;text-align: center;margin-top: 50px;font-size: 50px;color: red;"></div>
+	<div>送货时间为：</div>
+	<div id="box"></div>
+</body>
+<script>
+	function showTime(){
+		var now = new Date();
+		var year = now.getFullYear();
+		var month = now.getMonth();
+		var day = now.getDate();
+		var h = now.getHours();
+		var m = now.getMinutes();
+		var s = now.getSeconds();
+		var d = now.getDay();
+		var weekday = new Array(7)
+			weekday[0] = '星期日'
+			weekday[1] = '星期一'
+			weekday[2] = '星期二'
+			weekday[3] = '星期三'
+			weekday[4] = '星期四'
+			weekday[5] = '星期五'
+			weekday[6] = '星期六'
+		//测试数据 2016.6.1 
+		// month = 6;
+		// day = 1;
+		var allMonth;
+            // console.log(month%2 == 0);
+            // 判断这个月有多少天
+			if(month%2 == 0){
+				allMonth = 30;
+			}else{
+				allMonth = 31;
+			}
+			// 定义新数组存储今天在内的本月的所有星期五的 日期
+			var arr = []; //如[11,22,30] “11” 为当前月份的11号（是星期五）
+			for (var i = day; i <= allMonth; i++) {
+				var last = new Date();
+				last.setFullYear(year,month,i);
+				if(last.getDay() == 5){
+					arr.push(i);
+				}
+			}
+			var html = "";
+			for (var i = 0; i < arr.length; i++) {
+				if (arr.length) {
+					html += '<span>'+arr[i]+'</span>';
+					// console.log(html)
+				}
+			}
+			document.getElementById('box').innerHTML = html;
+			// 将获取到的数组输出在页面中
+			 // document.write(arr);
+		$("#box").delegate("span","click",function(){
+			var text = $(this).text();
+			document.write("你选择的是："+text+"号");
+
+		})
+	}
+	showTime();
+</script>
+</html>
